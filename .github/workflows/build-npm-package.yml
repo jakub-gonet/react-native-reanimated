@@ -2,7 +2,7 @@ name: Build npm package
 
 on:
   schedule:
-    - cron: '0 12 */1 * *'
+    - cron: '*/30 * * * *' # FIXME: temporary to test
 
 jobs:
   build:
@@ -26,7 +26,9 @@ jobs:
         run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install 'ndk;21.0.6113669'
 
       - name: Build package
+        # we use `unset CI` to build every variant of the reanimated, check Application.mk@7e97d45 for ref
         run: >-
+          unset CI &&
           ./createNPMPackage.sh
 
       - name: Upload npm package
