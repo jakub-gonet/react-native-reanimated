@@ -1,8 +1,9 @@
 name: Build npm package
 
 on:
-  schedule:
-    - cron: '30 * * * *' # FIXME: temporary to test
+  push:
+    branches:
+      - master
 
 jobs:
   build:
